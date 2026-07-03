@@ -1,0 +1,17 @@
+mode,target_frac,kept_frac,mlm_loss
+baseline,1.0,1.0,2.2729330504429095
+spectral,0.9,0.8153,3.5541
+uniform,0.9,0.8997,3.2616
+random,0.9,0.7971,3.8364
+spectral,0.8,0.769,4.7533
+uniform,0.8,0.7995,4.0092
+random,0.8,0.7467,4.7068
+spectral,0.7,0.6949,5.5296
+uniform,0.7,0.7005,4.9141
+random,0.7,0.6815,5.3538
+spectral,0.6,0.5999,6.414
+uniform,0.6,0.6003,5.7311
+random,0.6,0.5993,6.0706
+spectral,0.5,0.5,7.3625
+uniform,0.5,0.5,6.5693
+random,0.5,0.5001,6.7579

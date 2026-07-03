@@ -1,0 +1,60 @@
+name: CI (fast checks)
+
+# Fast correctness gate on every push/PR: pipeline invariants + a small
+# end-to-end run on ALBERT (10 unique matrices, ~12M params). No BERT-large,
+# no compression sweep — those live in full-reproduction.yml.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-${{ hashFiles('requirements.txt') }}
+
+      - name: Cache Hugging Face models
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-albert-v1
+
+      - name: Install (CPU torch)
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch==2.12.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements.txt
+
+      - name: Invariant tests (calibration, scale, orientation, spikes)
+        run: python -m pytest tests/ -q
+
+      - name: Smoke reproduction on ALBERT
+        run: |
+          mkdir -p out figs
+          python run_characterize.py albert-base-v2
+          FIG_OUT=figs python -c "import figures_all as F; \
+            spec=F.load_spectra('albert-base-v2'); \
+            F.core01_pdf('albert',spec); F.lv02_perlayer('albert',spec)"
+
+      - name: Upload artifacts (CSV + figures)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: albert-smoke-outputs
+          path: |
+            out/characterize.csv
+            figs/*.pdf
+          if-no-files-found: ignore
