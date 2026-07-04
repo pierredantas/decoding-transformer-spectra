@@ -1,0 +1,3 @@
+model,n_ffn,n_att,ffn_mean,att_mean,attn_qkv_mean,attn_out_mean,U,p,AUC,rank_biserial,between_gap,within_attn_spread,within_over_between
+bert-base-uncased,24,48,0.0919,0.1056,0.1185,0.0668,772,0.0195,0.6701,0.3403,0.0136,0.0517,3.79
+bert-large-uncased,48,96,0.098,0.1184,0.1288,0.087,3253,0.0001,0.7059,0.4119,0.0204,0.0418,2.05
