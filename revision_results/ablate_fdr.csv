@@ -1,0 +1,15 @@
+family,max_q,median_q,model,n
+attn_out,0.00498,0.00498,bert-base-uncased,12
+attn_qkv,0.00498,0.00498,bert-base-uncased,36
+emb_position,0.00498,0.00498,bert-base-uncased,1
+emb_word,0.00498,0.00498,bert-base-uncased,1
+ffn_intermediate,0.00498,0.00498,bert-base-uncased,12
+ffn_output,0.00498,0.00498,bert-base-uncased,12
+pooler,0.00498,0.00498,bert-base-uncased,1
+attn_out,0.00498,0.00498,bert-large-uncased,24
+attn_qkv,0.00498,0.00498,bert-large-uncased,72
+emb_position,0.00498,0.00498,bert-large-uncased,1
+emb_word,0.00498,0.00498,bert-large-uncased,1
+ffn_intermediate,0.00498,0.00498,bert-large-uncased,24
+ffn_output,0.00498,0.00498,bert-large-uncased,24
+pooler,0.00498,0.00498,bert-large-uncased,1
