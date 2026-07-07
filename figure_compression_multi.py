@@ -5,9 +5,10 @@ import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 from collections import defaultdict
 
 OUT = os.environ.get("FIG_OUT", ".")
-COL = {"uniform": "#1f77b4", "spectral": "#d62728", "random": "#7f7f7f", "gd": "#2ca02c"}
+COL = {"uniform": "#1f77b4", "spectral": "#d62728", "random": "#7f7f7f", "gd": "#2ca02c",
+       "asvd": "#9467bd", "fwsvd": "#ff7f0e"}
 LAB = {"uniform": "uniform", "spectral": "spectral-guided", "random": "random",
-       "gd": "Gavish–Donoho"}
+       "gd": "Gavish–Donoho", "asvd": "ASVD", "fwsvd": "FWSVD"}
 NAME = {"bert-base-uncased": "BERT-base", "bert-large-uncased": "BERT-large",
         "albert-base-v2": "ALBERT"}
 
@@ -27,7 +28,7 @@ def main():
     models = [m for m in ["bert-base-uncased", "bert-large-uncased"] if m in d]
     fig, axes = plt.subplots(1, len(models), figsize=(4.2 * len(models), 3.4), squeeze=False)
     for ax, model in zip(axes[0], models):
-        for mode in ["uniform", "spectral", "random"]:
+        for mode in ["uniform", "spectral", "random", "asvd", "fwsvd"]:
             pts = sorted(d[model][mode].items())
             if not pts: continue
             xs = [k for k, _ in pts]; ys = [np.mean(v) for _, v in pts]; es = [np.std(v) for _, v in pts]
@@ -43,8 +44,9 @@ def main():
         ax.set_xlabel("fraction of SVD parameters kept"); ax.invert_xaxis(); ax.grid(alpha=0.3)
         if ax is axes[0][0]: ax.set_ylabel("masked-LM loss (WikiText-2)")
         ax.legend(fontsize=6)
-    fig.suptitle("Compression across models: spectral-guided vs uniform vs random vs Gavish–Donoho "
-                 "(mean ± s.d. over seeds, no fine-tuning)", fontsize=9)
+    fig.suptitle("Compression across models: plain-SVD allocations (uniform / spectral-guided / random) "
+                 "vs activation-aware bases (ASVD / FWSVD) vs Gavish–Donoho "
+                 "(mean ± s.d. over seeds, no fine-tuning)", fontsize=8)
     fig.tight_layout()
     p = os.path.join(OUT, "fig_real_compression_multi.pdf")
     fig.savefig(p, bbox_inches="tight"); print("wrote", p)
