@@ -1,0 +1,7 @@
+model,budget,kept_naive,kept_bbp,max_abs_drank,mean_abs_drank,rank_spearman
+bert-base-uncased,0.7,0.6949,0.6936,25,7.639,0.998
+bert-base-uncased,0.5,0.5,0.5,18,5.875,0.998
+bert-base-uncased,0.3,0.3,0.3,11,3.486,0.998
+bert-large-uncased,0.7,0.6974,0.6974,24,6.583,0.9983
+bert-large-uncased,0.5,0.5,0.5,17,4.84,0.9983
+bert-large-uncased,0.3,0.3,0.3,11,2.861,0.9983
