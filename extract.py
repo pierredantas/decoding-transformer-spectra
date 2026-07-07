@@ -8,6 +8,7 @@ REVISIONS = {
     "bert-base-uncased":  "86b5e0934494bd15c9632b12f734a8a67f723594",
     "bert-large-uncased": "6da4b6a26a1877e173fca3225479512db81a5e5b",
     "albert-base-v2":     "8e2f239c5f8a2c0f253781ca60135db913e5c80c",
+    "google/vit-base-patch16-224": "3f49326eb077187dfe1c2a2bb15fbd74e6ab91e3",
 }
 
 
